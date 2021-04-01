@@ -1,0 +1,44 @@
+{
+	"name": "ForTrainingTools",
+	"author": [
+		"4training.net"
+	],
+	"url": "https://www.4training.net",
+	"descriptionmsg": "fortrainingtools-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "other",
+	"requires": {
+		"MediaWiki": ">= 1.31.0"
+	},
+	"config": {
+		"ForTrainingToolsGenerateOdtUrl": {
+			"description": "The handler URL for the ODT-generator tool"
+		}
+	},
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\ForTrainingTools\\": "includes/"
+	},
+	"Hooks": {
+		"SkinTemplateNavigation": "MediaWiki\\Extension\\ForTrainingTools\\Hooks::onSkinTemplateNavigation",
+		"ResourceLoaderGetConfigVars": "MediaWiki\\Extension\\ForTrainingTools\\Hooks::onResourceLoaderGetConfigVars"
+	},
+	"MessagesDirs": {
+		"ForTrainingTools": [
+			"i18n"
+		]
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "resources",
+		"remoteExtPath": "ForTrainingTools/resources"
+	},
+	"ResourceModules": {
+		"ext.forTrainingTools": {
+			"dependencies": [ "mediawiki.jqueryMsg"],
+			"messages": [ "fortrainingtools-desc"],
+			"styles": [],
+			"scripts": [ "ext.forTrainingTools/init.js"]
+		}
+	},
+
+	"manifest_version": 2
+}

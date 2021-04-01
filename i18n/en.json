@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"www.4training.net"
+		]
+	},
+	"generateodt": "ODT-Generator",
+	"fortrainingtools-desc": "This adds some custom behaviour to www.4training.net"
+}
