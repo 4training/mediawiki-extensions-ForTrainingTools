@@ -12,6 +12,7 @@
 	},
 	"config": {
 		"ForTrainingToolsGenerateOdtUrl": {
+			"value": "",
 			"description": "The handler URL for the ODT-generator tool"
 		}
 	},
