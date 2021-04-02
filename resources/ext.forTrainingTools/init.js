@@ -1,5 +1,5 @@
 ( function() {
-	if (!mw.config.exists('wgForTrainingToolsGenerateOdtUrl')) {
+	if (!mw.config.exists('wgForTrainingToolsGenerateOdtUrl') || !mw.config.get('wgForTrainingToolsGenerateOdtUrl')) {
 		mw.notify('Missing configuration variable $wgForTrainingToolsGenerateOdtUrl. ODT-Generator not available.', { title: 'Error' })
 		return;
 	}
