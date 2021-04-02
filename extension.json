@@ -3,7 +3,7 @@
 	"author": [
 		"4training.net"
 	],
-	"url": "https://www.4training.net",
+	"url": "https://github.com/4training/mediawiki-extensions-ForTrainingTools",
 	"descriptionmsg": "fortrainingtools-desc",
 	"license-name": "GPL-2.0-or-later",
 	"type": "other",
