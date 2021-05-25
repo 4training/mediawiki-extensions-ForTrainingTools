@@ -67,7 +67,7 @@ class Hooks {
 				'Church', 'Healing', 'My Story with God', 'Bible Reading Hints (Seven Stories full of Hope)',
 				'Bible Reading Hints', 'Bible Reading Hints (Starting with the Creation)', 'A Daily Prayer',
 				'The Role of a Helper in Prayer', 'Leading a Prayer Time', 'Overcoming Negative Inheritance',
-				'How to Continue After a Prayer Time');	// Only enable the function for these worksheets (temporary, TODO)*/
+				'How to Continue After a Prayer Time', 'Four Kinds of Disciples');	// Only enable the function for these worksheets (temporary, TODO)*/
 			if (!in_array($worksheet, $allowed))
 				return true;
 				
