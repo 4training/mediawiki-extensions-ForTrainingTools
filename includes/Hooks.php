@@ -60,17 +60,6 @@ class Hooks {
 			if (!$hasOdt)
 				return true;
 
-			$allowed = array("God's Story (five fingers)", "God's Story (first and last sacrifice)", 'Baptism',
-				'Prayer', 'Forgiving Step by Step', 'Confessing Sins and Repenting', 'Time with God', 'Hearing from God',
-				'Family and our Relationship with God', 'Worksheet for the Book of Acts',
-				'Training Meeting Outline', 'Overcoming Fear and Anger', 'Getting Rid of Colored Lenses',
-				'Church', 'Healing', 'My Story with God', 'Bible Reading Hints (Seven Stories full of Hope)',
-				'Bible Reading Hints', 'Bible Reading Hints (Starting with the Creation)', 'A Daily Prayer',
-				'The Role of a Helper in Prayer', 'Leading a Prayer Time', 'Overcoming Negative Inheritance',
-				'How to Continue After a Prayer Time', 'Four Kinds of Disciples');	// Only enable the function for these worksheets (temporary, TODO)*/
-			if (!in_array($worksheet, $allowed))
-				return true;
-				
 			// important: load our javascript class
 			$skinTemplate->getOutput()->addModules( 'ext.forTrainingTools' );
 
