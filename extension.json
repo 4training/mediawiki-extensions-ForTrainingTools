@@ -14,6 +14,10 @@
 		"ForTrainingToolsGenerateOdtUrl": {
 			"value": "",
 			"description": "The handler URL for the ODT-generator tool"
+		},
+		"ForTrainingToolsCorrectBotUrl": {
+			"value": "",
+			"description": "The handler URL for CorrectBot"
 		}
 	},
 	"AutoloadNamespaces": {
@@ -21,7 +25,8 @@
 	},
 	"Hooks": {
 		"SkinTemplateNavigation": "MediaWiki\\Extension\\ForTrainingTools\\Hooks::onSkinTemplateNavigation",
-		"ResourceLoaderGetConfigVars": "MediaWiki\\Extension\\ForTrainingTools\\Hooks::onResourceLoaderGetConfigVars"
+		"ResourceLoaderGetConfigVars": "MediaWiki\\Extension\\ForTrainingTools\\Hooks::onResourceLoaderGetConfigVars",
+		"RequestContextCreateSkin": "MediaWiki\\Extension\\ForTrainingTools\\Hooks::onRequestContextCreateSkin"
 	},
 	"MessagesDirs": {
 		"ForTrainingTools": [

@@ -1,19 +1,24 @@
 # ForTrainingTools extension
 This MediaWiki extension adds custom functionality for the https://www.4training.net website.
-Currently it has one feature:
+Currently it adds two menu entries for logged-in users to start tools on worksheet translations.
+This part is found in the includes/ subdirectory and is in PHP.
+A JavaScript part (based on JQuery) is found in the resources/ subdirectory and handles user
+interaction with these menu items: When a user clicks on one, the script sends a POST request
+to the handler URLs configured in `LocalSettings.php`.
+
+These requests are handled by CGI scripts calling the scripts doing the actual work.
+They are implemented in Python and can be found in `https://github.com/4training/pywikitools`
 
 ## ODT-Generator
-This extension adds a menu entry for logged-in users to start the ODT generator on worksheets
-where it is available. This part is found in the includes/ subdirectory and is in PHP.
-A JavaScript part (based on JQuery) is found in the resources/ subdirectory and handles user
-interaction with this menu item: When a user clicks on it, this script sends a POST request
-to the handler URL configured in `$wgForTrainingToolsGenerateOdtUrl`. It sends the following
-parameters with it:
+Configuration variable for the handler URL: `$wgForTrainingToolsGenerateOdtUrl`.
+It sends the following parameters with it:
 * `worksheet` (in the form of `page/languagecode`)
 * `user` (the user name requesting the ODT generator; receives an email afterwards)
 
-The actual work is found in a python repository with the CGI handler script and the script
-doing the actual work.
+## CorrectBot
+Configuration variable for the handler URL: `$wgForTrainingToolsCorrectBotUrl`.
+It sends the following parameters with it:
+* `worksheet` (in the form of `page/languagecode`)
 
 # Installation and Configuration
 Copy the extension files into `mediawiki/extensions/`
@@ -24,8 +29,9 @@ With git:
 Add the following lines to `LocalSettings.php`:
 ```php
 wfLoadExtension('ForTrainingTools');
-# Configure handler URL for the generate ODT tool
+# Configure handler URLs for the tools
 $wgForTrainingToolsGenerateOdtUrl = 'https://www.example.org/cgi-bin/generateodt.py';
+$wgForTrainingToolsCorrectBotUrl = '/cgi-bin/correctbot.py';
 ```
 
 # See also
