@@ -25,10 +25,14 @@ class Hooks {
 	 * Make our custom configuration variables available in JavaScript
 	 */
 	public static function onResourceLoaderGetConfigVars(array &$vars) {
-		global $wgForTrainingToolsGenerateOdtUrl;
+		global $wgForTrainingToolsGenerateOdtUrl, $wgForTrainingToolsCorrectBotUrl;
 
 		if (isset($wgForTrainingToolsGenerateOdtUrl)) {
 			$vars['wgForTrainingToolsGenerateOdtUrl'] = $wgForTrainingToolsGenerateOdtUrl;
+		}
+
+		if (isset($wgForTrainingToolsCorrectBotUrl)) {
+			$vars['wgForTrainingToolsCorrectBotUrl'] = $wgForTrainingToolsCorrectBotUrl;
 		}
 
 		return true;
@@ -88,7 +92,7 @@ class Hooks {
 			$links['actions']['correctbot'] = array(
 				'text' => wfMessage('correctbot')->text(),
 				'href' => $title
-			)
+			);
 		}
 
 		return true;
