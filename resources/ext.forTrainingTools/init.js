@@ -35,8 +35,8 @@
 					mw.notify($('<p>CorrectBot did ' + matches[1] + ' corrections and had '
 													 + matches[2] + ' suggestions and '
 													 + matches[3] + ' warnings. ' +
-								'Please check the <a href="/CorrectBot:' + mw.config.get('wpPageName') +
-								'">CorrectBot report</a></p>'),
+								'Please check the <a href="/CorrectBot:' + mw.config.get( 'wgPageName' ) +
+								'">CorrectBot report for details.</a></p>'),
 								{ title: 'Success!', type: 'info', autoHide: false});
 				} else {
 					mw.notify($('<p>CorrectBot failed. Please contact an administrator. Log:</p><p>' + data + '</p>'),
