@@ -13,7 +13,7 @@
 		mw.notify($('<p>Request sent. You should get a notification within a minute when the translated document is ready.<br/>Documentation: see <a href="/4training:Creating_and_Uploading_Files">Manual: Creating and Uploading Files</a></p>'), { title: 'Processing...', type: 'info'});
 		$.post(mw.config.get('wgForTrainingToolsGenerateOdtUrl'), postArgs)
 			.done( function( data ) {
-				if (data.search('Success')) {
+				if (data.indexOf('Success') > -1) {
 					mw.notify($('<p>Request sent. The translated odt file will be available soon in the Dropbox. Please check it, finish all formatting and upload it into the system. Thank you very much!<br/>Documentation: see <a href="/4training:Creating_and_Uploading_Files">Manual: Creating and Uploading Files</a></p>'), { title: 'Success!', type: 'info', autoHide: false});
 				} else {
 					mw.notify($('<p>There was an error while trying to generate the ODT file. Please contact an administrator. Log:</p><p>' + data + '</p>'), { title: 'Error!', type: 'info', autoHide: false});
@@ -26,14 +26,21 @@
     } );
     $( "#ca-correctbot a" ).on( 'click', function ( e ) {
         var postArgs = { page: mw.config.get( 'wgPageName' ) };
-		//alert(JSON.stringify(postArgs, null, 4));
 		mw.notify($('<p>Request sent. You should get a notification within a minute when the translated document is ready.<br/>Documentation: see <a href="/4training:Creating_and_Uploading_Files">Manual: Creating and Uploading Files</a></p>'), { title: 'Processing...', type: 'info'});
 		$.post(mw.config.get('wgForTrainingToolsCorrectBotUrl'), postArgs)
 			.done( function( data ) {
-				if (data.search('Success')) {
-					mw.notify($('<p>CorrectBot did TODO corrections and had TODO suggestions and warnings. Please check TODO</p>'), { title: 'Success!', type: 'info', autoHide: false});
+				// .* doesn't match newlines, so we use the workaround [\s\S]*
+				var matches = data.match(/(\d+) correction[\s\S]*(\d+) suggestion[\s\S]*(\d+) warning/);
+				if (matches != null) {
+					mw.notify($('<p>CorrectBot did ' + matches[1] + ' corrections and had '
+													 + matches[2] + ' suggestions and '
+													 + matches[3] + ' warnings. ' +
+								'Please check the <a href="/CorrectBot:' + mw.config.get('wpPageName') +
+								'">CorrectBot report</a></p>'),
+								{ title: 'Success!', type: 'info', autoHide: false});
 				} else {
-					mw.notify($('<p>CorrectBot failed. Please contact an administrator. Log:</p><p>' + data + '</p>'), { title: 'Error!', type: 'info', autoHide: false});
+					mw.notify($('<p>CorrectBot failed. Please contact an administrator. Log:</p><p>' + data + '</p>'),
+								{ title: 'Error!', type: 'info', autoHide: false});
 				}
 			})
 			.fail( function() {
