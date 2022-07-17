@@ -26,7 +26,9 @@
     } );
     $( "#ca-correctbot a" ).on( 'click', function ( e ) {
         var postArgs = { page: mw.config.get( 'wgPageName' ) };
-		mw.notify($('<p>Request sent. You should get a notification within a minute when the translated document is ready.<br/>Documentation: see <a href="/4training:Creating_and_Uploading_Files">Manual: Creating and Uploading Files</a></p>'), { title: 'Processing...', type: 'info'});
+		mw.notify($("<p>CorrectBot is working hard to make the translation even better. " +
+					"He's fast and should be finished within seconds, then you'll get another notification. " +
+					"Thank you for your patience and all your work!"), { title: 'Processing...', type: 'info'});
 		$.post(mw.config.get('wgForTrainingToolsCorrectBotUrl'), postArgs)
 			.done( function( data ) {
 				// .* doesn't match newlines, so we use the workaround [\s\S]*
@@ -36,7 +38,7 @@
 													 + matches[2] + ' suggestions and '
 													 + matches[3] + ' warnings. ' +
 								'Please check the <a href="/CorrectBot:' + mw.config.get( 'wgPageName' ) +
-								'">CorrectBot report for details.</a></p>'),
+								'">CorrectBot report</a> for details.</p>'),
 								{ title: 'Success!', type: 'info', autoHide: false});
 				} else {
 					mw.notify($('<p>CorrectBot failed. Please contact an administrator. Log:</p><p>' + data + '</p>'),
