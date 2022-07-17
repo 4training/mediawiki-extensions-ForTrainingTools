@@ -28,7 +28,7 @@
         var postArgs = { page: mw.config.get( 'wgPageName' ) };
 		mw.notify($("<p>CorrectBot is working hard to make the translation even better. " +
 					"He's fast and should be finished within seconds, then you'll get another notification. " +
-					"Thank you for your patience and all your work!"), { title: 'Processing...', type: 'info'});
+					"Thank you for your patience and all your work!</p>"), { title: 'Processing...', type: 'info'});
 		$.post(mw.config.get('wgForTrainingToolsCorrectBotUrl'), postArgs)
 			.done( function( data ) {
 				// .* doesn't match newlines, so we use the workaround [\s\S]*
