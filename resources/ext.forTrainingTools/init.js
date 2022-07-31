@@ -36,9 +36,9 @@
 					// CorrectBot didn't save anything. In the next line is the reason, let's get it
 					var reason = data.substring(nothing_saved + 14).split(/\n/, 3)[1]
 					mw.notify($('<p>' + reason + '<br/>' +
-								'<a href="/CorrectBot:' + mw.config.get( 'wgPageName' ) +
-								'">Link to previous CorrectBot report (if it exists)</a></p>'),
-								{ title: 'Nothing saved', type: 'info', autoHide: false});
+								'You may want to look at the <a href="/CorrectBot:' + mw.config.get( 'wgPageName' ) +
+								'">previous CorrectBot report</a></p>'),
+								{ title: 'Nothing saved!', type: 'info', autoHide: false});
 				} else {
 					// .* doesn't match newlines, so we use the workaround [\s\S]*
 					var matches = data.match(/(\d+) correction[\s\S]*(\d+) suggestion[\s\S]*(\d+) warning/);
