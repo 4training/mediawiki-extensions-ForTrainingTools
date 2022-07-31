@@ -31,18 +31,28 @@
 					"Thank you for your patience and all your work!</p>"), { title: 'Processing...', type: 'info'});
 		$.post(mw.config.get('wgForTrainingToolsCorrectBotUrl'), postArgs)
 			.done( function( data ) {
-				// .* doesn't match newlines, so we use the workaround [\s\S]*
-				var matches = data.match(/(\d+) correction[\s\S]*(\d+) suggestion[\s\S]*(\d+) warning/);
-				if (matches != null) {
-					mw.notify($('<p>CorrectBot did ' + matches[1] + ' corrections and had '
-													 + matches[2] + ' suggestions and '
-													 + matches[3] + ' warnings. ' +
-								'Please check the <a href="/CorrectBot:' + mw.config.get( 'wgPageName' ) +
-								'">CorrectBot report</a> for details.</p>'),
-								{ title: 'Success!', type: 'info', autoHide: false});
+				var nothing_saved = data.indexOf('NOTHING SAVED.');
+				if (nothing_saved > -1) {
+					// CorrectBot didn't save anything. In the next line is the reason, let's get it
+					var reason = data.substring(nothing_saved + 14).split(/\n/, 3)[1]
+					mw.notify($('<p>' + reason + '<br/>' +
+								'<a href="/CorrectBot:' + mw.config.get( 'wgPageName' ) +
+								'">Link to previous CorrectBot report (if it exists)</a></p>'),
+								{ title: 'Nothing saved', type: 'info', autoHide: false});
 				} else {
-					mw.notify($('<p>CorrectBot failed. Please contact an administrator. Log:</p><p>' + data + '</p>'),
-								{ title: 'Error!', type: 'info', autoHide: false});
+					// .* doesn't match newlines, so we use the workaround [\s\S]*
+					var matches = data.match(/(\d+) correction[\s\S]*(\d+) suggestion[\s\S]*(\d+) warning/);
+					if (matches != null) {
+						mw.notify($('<p>CorrectBot did ' + matches[1] + ' corrections and had '
+												         + matches[2] + ' suggestions and '
+														 + matches[3] + ' warnings. ' +
+									'Please check the <a href="/CorrectBot:' + mw.config.get( 'wgPageName' ) +
+									'">CorrectBot report</a> for details.</p>'),
+									{ title: 'Success!', type: 'info', autoHide: false});
+					} else {
+						mw.notify($('<p>CorrectBot failed. Please contact an administrator. Log:</p><p>' + data + '</p>'),
+									{ title: 'Error!', type: 'info', autoHide: false});
+					}
 				}
 			})
 			.fail( function() {
