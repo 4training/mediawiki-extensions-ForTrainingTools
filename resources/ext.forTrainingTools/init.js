@@ -41,7 +41,7 @@
 								{ title: 'Nothing saved!', type: 'info', autoHide: false});
 				} else {
 					// .* doesn't match newlines, so we use the workaround [\s\S]*
-					var matches = data.match(/(\d+) correction[\s\S]*(\d+) suggestion[\s\S]*(\d+) warning/);
+					var matches = data.match(/(\d+) correction[\s\S]*?(\d+) suggestion[\s\S]*?(\d+) warning/);
 					if (matches != null) {
 						mw.notify($('<p>CorrectBot did ' + matches[1] + ' corrections and had '
 												         + matches[2] + ' suggestions and '
