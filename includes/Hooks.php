@@ -70,16 +70,16 @@ class Hooks {
 			$languagecode = substr($title, $pos + 1);
 			$worksheet = substr($title, 0, $pos);
 
-			// Only display this option if there is an odt file linked to the page
+			// Only display this option if there is an odt or odg file linked to the page
 			$templates = $title->getTemplateLinksFrom();
-			$hasOdt = false;
+			$hasOd = false;
 			foreach ($templates as $template) {
-				if ($template->getText() === "OdtDownload") {
-					$hasOdt = true;
+				if (in_array($template->getText(), ["OdtDownload", "OdgDownload"])) {
+					$hasOd = true;
 					break;
 				}
 			}
-			if (!$hasOdt)
+			if (!$hasOd)
 				return true;
 
 			// important: load our javascript class
