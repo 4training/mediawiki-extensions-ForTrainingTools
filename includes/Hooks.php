@@ -65,12 +65,21 @@ class Hooks {
 		$title = $skinTemplate->getTitle();
 		if ( $title->getNamespace() !== NS_SPECIAL && $wgUser->isLoggedIn()) {
 			$pos = strpos($title, '/');
-			if ($pos === false)		// we're on the English original of a page (e.g. 'Prayer') -> don't show the option at all
+			if ($pos === false)		// we're on the English original of a page (e.g. 'Prayer') -> don't show any extra option
 				return true;
-			$languagecode = substr($title, $pos + 1);
-			$worksheet = substr($title, 0, $pos);
+			// $languagecode = substr($title, $pos + 1);
+			// $worksheet = substr($title, 0, $pos);
 
-			// Only display this option if there is an odt or odg file linked to the page
+			// important: load our javascript class
+			$skinTemplate->getOutput()->addModules( 'ext.forTrainingTools' );
+
+			// CorrectBot menu item is available on all translated pages
+			$links['actions']['correctbot'] = array(
+				'text' => wfMessage('correctbot')->text(),
+				'href' => $title
+			);
+
+			// Only display ODT generator if there is an odt or odg file linked to the page
 			$templates = $title->getTemplateLinksFrom();
 			$hasOd = false;
 			foreach ($templates as $template) {
@@ -82,15 +91,8 @@ class Hooks {
 			if (!$hasOd)
 				return true;
 
-			// important: load our javascript class
-			$skinTemplate->getOutput()->addModules( 'ext.forTrainingTools' );
-
 			$links['actions']['generateodt'] = array(
 				'text' => wfMessage( 'generateodt' )->text(),
-				'href' => $title
-			);
-			$links['actions']['correctbot'] = array(
-				'text' => wfMessage('correctbot')->text(),
 				'href' => $title
 			);
 		}
