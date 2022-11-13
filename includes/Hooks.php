@@ -70,16 +70,7 @@ class Hooks {
 			// $languagecode = substr($title, $pos + 1);
 			// $worksheet = substr($title, 0, $pos);
 
-			// important: load our javascript class
-			$skinTemplate->getOutput()->addModules( 'ext.forTrainingTools' );
-
-			// CorrectBot menu item is available on all translated pages
-			$links['actions']['correctbot'] = array(
-				'text' => wfMessage('correctbot')->text(),
-				'href' => $title
-			);
-
-			// Only display ODT generator if there is an odt or odg file linked to the page
+			// Only display the two menu items on translated worksheet pages (if there is an odt or odg file linked to the page)
 			$templates = $title->getTemplateLinksFrom();
 			$hasOd = false;
 			foreach ($templates as $template) {
@@ -90,6 +81,16 @@ class Hooks {
 			}
 			if (!$hasOd)
 				return true;
+
+			// important: load our javascript class
+			$skinTemplate->getOutput()->addModules( 'ext.forTrainingTools' );
+
+			// TODO: It would be great if CorrectBot could be made available on all translated pages, not only on worksheet pages
+			// but currently it would do some damage in some cases as there is a wider variety of content than on worksheet pages
+			$links['actions']['correctbot'] = array(
+				'text' => wfMessage('correctbot')->text(),
+				'href' => $title
+			);
 
 			$links['actions']['generateodt'] = array(
 				'text' => wfMessage( 'generateodt' )->text(),
