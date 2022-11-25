@@ -1,4 +1,5 @@
 {
+	"name": "4training/4training-tools",
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": "1.0.0",
 		"mediawiki/mediawiki-codesniffer": "30.0.0",
