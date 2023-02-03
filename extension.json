@@ -24,7 +24,7 @@
 		"MediaWiki\\Extension\\ForTrainingTools\\": "includes/"
 	},
 	"Hooks": {
-		"SkinTemplateNavigation": "MediaWiki\\Extension\\ForTrainingTools\\Hooks::onSkinTemplateNavigation",
+		"SkinTemplateNavigation::Universal": "MediaWiki\\Extension\\ForTrainingTools\\Hooks::onSkinTemplateNavigation_Universal",
 		"ResourceLoaderGetConfigVars": "MediaWiki\\Extension\\ForTrainingTools\\Hooks::onResourceLoaderGetConfigVars",
 		"RequestContextCreateSkin": "MediaWiki\\Extension\\ForTrainingTools\\Hooks::onRequestContextCreateSkin"
 	},

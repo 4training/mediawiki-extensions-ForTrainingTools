@@ -58,12 +58,11 @@ class Hooks {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SkinTemplateNavigation
 	 * Add extra "ODT-Generator" and "CorrectBot" navigation items to the navigation bar for logged in users
 	 */
-	public static function onSkinTemplateNavigation(\SkinTemplate $skinTemplate, array &$links ) {
-		global $wgRequest, $wgUser;
+	public static function onSkinTemplateNavigation_Universal(\SkinTemplate $skinTemplate, array &$links ) {
 		// TODO this doesn't work, apparently we're too late here already
 //		$skinTemplate->getOutput()->getCSP()->addDefaultSrc('www.trainingfuertrainer.de');
 		$title = $skinTemplate->getTitle();
-		if ( $title->getNamespace() !== NS_SPECIAL && $wgUser->isLoggedIn()) {
+		if ( $title->getNamespace() !== NS_SPECIAL && $skinTemplate->getUser()->isRegistered()) {
 			$pos = strpos($title, '/');
 			if ($pos === false)		// we're on the English original of a page (e.g. 'Prayer') -> don't show any extra option
 				return true;
