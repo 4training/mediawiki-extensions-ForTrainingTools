@@ -1,5 +1,5 @@
 {
-	"name": "4training/4training-tools",
+	"name": "4training/for-training-tools",
 	"type": "mediawiki-extension",
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": "1.0.0",
