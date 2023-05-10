@@ -60,46 +60,55 @@ class Hooks {
 	 */
 	public static function onSkinTemplateNavigation_Universal(\SkinTemplate $skinTemplate, array &$links ) {
 		// TODO this doesn't work, apparently we're too late here already
-//		$skinTemplate->getOutput()->getCSP()->addDefaultSrc('www.trainingfuertrainer.de');
+		// $skinTemplate->getOutput()->getCSP()->addDefaultSrc('www.trainingfuertrainer.de');
 		$title = $skinTemplate->getTitle();
 		if ( $title->getNamespace() !== NS_SPECIAL && $skinTemplate->getUser()->isRegistered()) {
 			$pos = strpos($title, '/');
 			if ($pos === false)		// we're on the English original of a page (e.g. 'Prayer') -> don't show any extra option
 				return true;
 			// $languagecode = substr($title, $pos + 1);
-			// $worksheet = substr($title, 0, $pos);
+			$worksheet = substr($title, 0, $pos);
 
-			// Only display the two menu items on translated worksheet pages (if there is an odt or odg file linked to the page)
+			// Which menu items should we display?
+			$showGenerateODT = false;
+			$showCorrectBot = false;
+			// Display everything on translated worksheet pages (if there is an odt or odg file linked to the page)
 			$templates = $title->getTemplateLinksFrom();
-			$hasOd = false;
 			foreach ($templates as $template) {
 				if (in_array($template->getText(), ["OdtDownload", "OdgDownload"])) {
-					$hasOd = true;
+					$showGenerateODT = true;
+					$showCorrectBot = true;
 					break;
 				}
 			}
-			if (!$hasOd)
+
+			// TODO: It would be great if CorrectBot could be made available on all translated pages, not only on worksheet pages
+			// but currently it would do some damage in some cases as there is a wider variety of content than on worksheet pages
+			if ($worksheet === "Template:BibleReadingHints")
+				$showCorrectBot = true;
+			if (!$showGenerateODT && !$showCorrectBot)
 				return true;
 
 			// important: load our javascript class
 			$skinTemplate->getOutput()->addModules( 'ext.forTrainingTools' );
 
-			// TODO: It would be great if CorrectBot could be made available on all translated pages, not only on worksheet pages
-			// but currently it would do some damage in some cases as there is a wider variety of content than on worksheet pages
-			$links['actions']['correctbot'] = array(
-				'text' => wfMessage('correctbot')->text(),
-				'href' => $title
-			);
+			if ($showCorrectBot) {
+				$links['actions']['correctbot'] = array(
+					'text' => wfMessage('correctbot')->text(),
+					'href' => $title
+				);
+			}
 
-			$links['actions']['generateodt'] = array(
-				'text' => wfMessage( 'generateodt' )->text(),
-				'href' => $title
-			);
+			if ($showGenerateODT) {
+				$links['actions']['generateodt'] = array(
+					'text' => wfMessage( 'generateodt' )->text(),
+					'href' => $title
+				);
+			}
 		}
 
 		return true;
-
-
 	}
+
 
 }
