@@ -25,7 +25,7 @@ class Hooks {
 	 * Make our custom configuration variables available in JavaScript
 	 */
 	public static function onResourceLoaderGetConfigVars(array &$vars) {
-		global $wgForTrainingToolsGenerateOdtUrl, $wgForTrainingToolsCorrectBotUrl;
+		global $wgForTrainingToolsGenerateOdtUrl, $wgForTrainingToolsCorrectBotUrl, $wgForTrainingToolsAutoTranslateUrl;
 
 		if (isset($wgForTrainingToolsGenerateOdtUrl)) {
 			$vars['wgForTrainingToolsGenerateOdtUrl'] = $wgForTrainingToolsGenerateOdtUrl;
@@ -33,6 +33,10 @@ class Hooks {
 
 		if (isset($wgForTrainingToolsCorrectBotUrl)) {
 			$vars['wgForTrainingToolsCorrectBotUrl'] = $wgForTrainingToolsCorrectBotUrl;
+		}
+
+		if (isset($wgForTrainingToolsAutoTranslateUrl)) {
+			$vars['wgForTrainingToolsAutoTranslateUrl'] = $wgForTrainingToolsAutoTranslateUrl;
 		}
 
 		return true;
