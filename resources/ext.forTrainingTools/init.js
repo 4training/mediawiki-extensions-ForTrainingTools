@@ -8,7 +8,7 @@
 		return;
 	}
     $( "#ca-generateodt a" ).on( 'click', function ( e ) {
-        var postArgs = { worksheet: mw.config.get( 'wgPageName' ), user: mw.user.getName() };
+        var postArgs = { page: mw.config.get( 'wgPageName' ), user: mw.user.getName() };
 		//alert(JSON.stringify(postArgs, null, 4));
 		mw.notify($('<p>Request sent. You should get a notification within a minute when the translated document is ready.<br/>Documentation: see <a href="/4training:Creating_and_Uploading_Files">Manual: Creating and Uploading Files</a></p>'), { title: 'Processing...', type: 'info'});
 		$.post(mw.config.get('wgForTrainingToolsGenerateOdtUrl'), postArgs)

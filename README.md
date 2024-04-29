@@ -12,13 +12,13 @@ They are implemented in Python and can be found in `https://github.com/4training
 ## ODT-Generator
 Configuration variable for the handler URL: `$wgForTrainingToolsGenerateOdtUrl`.
 It sends the following parameters with it:
-* `worksheet` (in the form of `page/languagecode`)
+* `page` (in the form of `worksheet/languagecode`)
 * `user` (the user name requesting the ODT generator; receives an email afterwards)
 
 ## CorrectBot
 Configuration variable for the handler URL: `$wgForTrainingToolsCorrectBotUrl`.
 It sends the following parameters with it:
-* `worksheet` (in the form of `page/languagecode`)
+* `page` (in the form of `worksheet/languagecode`)
 
 # Installation and Configuration
 Copy the extension files into `mediawiki/extensions/`
